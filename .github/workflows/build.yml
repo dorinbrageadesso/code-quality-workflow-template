@@ -11,14 +11,11 @@ jobs:
       # Set up SSH for submodule access
       - name: Set up SSH
         run: |
-          echo "#####"
-          printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          echo "#####"
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-
+          
       - name: Update submodules
         run: git submodule update --init --recursive
 
