@@ -17,23 +17,23 @@ on:
 
 jobs:
   build:
-    uses: org/code-quality-workflow-template/.github/workflows/build.yml@v1
+    uses: WITT-GCP-PLATFORM/log-code-quality-workflow-template/.github/workflows/build.yml@main
 
   spotless:
     needs: build
-    uses: org/code-quality-workflow-template/.github/workflows/spotless.yml@v1
+    uses: WITT-GCP-PLATFORM/log-code-quality-workflow-template/.github/workflows/spotless.yml@main
 
   checkstyle:
     needs: spotless
-    uses: org/code-quality-workflow-template/.github/workflows/checkstyle.yml@v1
+    uses: WITT-GCP-PLATFORM/log-code-quality-workflow-template/.github/workflows/checkstyle.yml@main
 
   pmd:
     needs: checkstyle
-    uses: org/code-quality-workflow-template/.github/workflows/pmd.yml@v1
+    uses: WITT-GCP-PLATFORM/log-code-quality-workflow-template/.github/workflows/pmd.yml@main
 
   tests:
     needs: pmd
-    uses: org/code-quality-workflow-template/.github/workflows/tests.yml@v1
+    uses: WITT-GCP-PLATFORM/log-code-quality-workflow-template/.github/workflows/tests.yml@main
 ```
 
 ## Project Configuration
@@ -47,4 +47,4 @@ See [the template repo docs](./) for example configs.
 
 ## Updating
 
-To use updates, bump the ref (`@v1`, `@main`, etc.) in your workflow file.
+To use updates, bump the ref (`@main`, `@main`, etc.) in your workflow file.
