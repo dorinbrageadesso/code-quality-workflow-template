@@ -12,7 +12,7 @@ jobs:
       - name: Set up SSH
         run: |
           echo "#####"
-          echo ${{ secrets.SSH_PRIVATE_KEY }}
+          printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           echo "#####"
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
