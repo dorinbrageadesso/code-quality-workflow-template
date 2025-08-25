@@ -1,0 +1,29 @@
+name: Code Quality
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+
+  spotless:
+    needs: build
+    uses: ./.github/workflows/spotless.yml
+
+  checkstyle:
+    needs: spotless
+    uses: ./.github/workflows/checkstyle.yml
+
+  pmd:
+    needs: checkstyle
+    uses: ./.github/workflows/pmd.yml
+
+  tests:
+    needs: pmd
+    uses: ./.github/workflows/tests.yml

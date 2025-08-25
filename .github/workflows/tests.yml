@@ -1,0 +1,26 @@
+name: Tests
+on:
+  workflow_call:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Run Tests with Coverage
+        run: mvn test jacoco:report
+
+      - name: Check JaCoCo Coverage
+        run: |
+          LINE_COV=$(grep -m1 'LINE' target/site/jacoco/index.html | grep -oP '\d+(?=%)')
+          if [ "$LINE_COV" -lt "80" ]; then
+            echo "Line coverage ($LINE_COV%) is below 80%!"
+            exit 1
+          fi
